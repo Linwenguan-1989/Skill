@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>$title - Skill Explainer</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --red: #BC1F1A;
+      --red-deep: #8f1512;
+      --red-soft: #fff0ef;
+      --ink: #191919;
+      --muted: #667085;
+      --line: rgba(188, 31, 26, 0.16);
+      --glass: rgba(255, 255, 255, 0.72);
+      --bg: #f7f8fb;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "PingFang SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.55;
+      background:
+        radial-gradient(circle at 18% 10%, rgba(188, 31, 26, 0.18), transparent 30%),
+        radial-gradient(circle at 82% 4%, rgba(255, 183, 178, 0.28), transparent 28%),
+        linear-gradient(135deg, #ffffff 0%, #f7f8fb 52%, #fff4f3 100%);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(188, 31, 26, 0.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(188, 31, 26, 0.055) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), transparent 80%);
+    }
+
+    main {
+      width: min(1080px, calc(100vw - 40px));
+      margin: 36px auto;
+      position: relative;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(28px, 5vw, 56px);
+      border: 1px solid rgba(255, 255, 255, 0.72);
+      border-radius: 28px;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.84), rgba(255, 255, 255, 0.56)),
+        linear-gradient(115deg, rgba(188, 31, 26, 0.12), rgba(255, 255, 255, 0.2));
+      backdrop-filter: blur(26px) saturate(1.35);
+      box-shadow: 0 28px 80px rgba(188, 31, 26, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.85);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 360px;
+      height: 360px;
+      right: -90px;
+      top: -120px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(188, 31, 26, 0.20), transparent 66%);
+      filter: blur(8px);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0 0 18px;
+      padding: 8px 12px;
+      border: 1px solid rgba(188, 31, 26, 0.18);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.58);
+      color: var(--red);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    h1 {
+      max-width: 760px;
+      margin: 0;
+      font-size: clamp(42px, 7vw, 78px);
+      line-height: 0.98;
+      letter-spacing: 0;
+    }
+
+    .one-liner {
+      max-width: 760px;
+      margin: 22px 0 0;
+      color: #2f3337;
+      font-size: clamp(19px, 2.3vw, 26px);
+      font-weight: 650;
+    }
+
+    .metaphor {
+      max-width: 760px;
+      margin: 18px 0 0;
+      padding: 18px 20px;
+      border: 1px solid rgba(188, 31, 26, 0.18);
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.62);
+      color: var(--red-deep);
+      font-size: 18px;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+    }
+
+    .key-grid,
+    .section-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .key-grid {
+      margin-top: 26px;
+    }
+
+    .mini-card {
+      min-height: 86px;
+      padding: 18px;
+      border: 1px solid rgba(188, 31, 26, 0.14);
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.66);
+      backdrop-filter: blur(18px) saturate(1.25);
+      box-shadow: 0 16px 38px rgba(36, 36, 36, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.82);
+    }
+
+    section {
+      margin-top: 22px;
+      padding: clamp(22px, 4vw, 34px);
+      border: 1px solid rgba(188, 31, 26, 0.13);
+      border-radius: 26px;
+      background: rgba(255, 255, 255, 0.60);
+      backdrop-filter: blur(22px) saturate(1.25);
+      box-shadow: 0 22px 60px rgba(34, 34, 34, 0.07);
+    }
+
+    h2 {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 0 18px;
+      font-size: 22px;
+      letter-spacing: 0;
+    }
+
+    .num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--red), #e06460);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 800;
+      box-shadow: 0 10px 22px rgba(188, 31, 26, 0.26);
+      flex: 0 0 auto;
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .flow-step {
+      position: relative;
+      min-height: 150px;
+      padding: 18px 16px;
+      border: 1px solid rgba(188, 31, 26, 0.15);
+      border-radius: 22px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(255, 246, 245, 0.56));
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    }
+
+    .flow-step:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      right: -13px;
+      top: 50%;
+      width: 14px;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(188, 31, 26, 0.28), rgba(188, 31, 26, 0.08));
+    }
+
+    .flow-index {
+      display: inline-flex;
+      margin-bottom: 28px;
+      color: var(--red);
+      font-size: 13px;
+      font-weight: 850;
+    }
+
+    .flow-step p {
+      margin: 0;
+      font-size: 15px;
+      color: #33373d;
+    }
+
+    @media (max-width: 880px) {
+      .key-grid,
+      .section-grid,
+      .flow {
+        grid-template-columns: 1fr;
+      }
+
+      .flow-step {
+        min-height: auto;
+      }
+
+      .flow-step:not(:last-child)::after {
+        right: auto;
+        left: 28px;
+        top: auto;
+        bottom: -13px;
+        width: 1px;
+        height: 14px;
+      }
+    }
+
+    @media (max-width: 620px) {
+      main {
+        width: calc(100vw - 24px);
+        margin: 12px auto;
+      }
+
+      .hero,
+      section {
+        border-radius: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header class="hero">
+      <p class="eyebrow">新手理解版</p>
+      <h1>$title</h1>
+      <p class="one-liner">$one_liner</p>
+      <p class="metaphor">$metaphor</p>
+      <div class="key-grid">$key_points</div>
+    </header>
+
+    <section>
+      <h2><span class="num">1</span>它是什么</h2>
+      <div class="section-grid"><div class="mini-card">$one_liner</div></div>
+    </section>
+
+    <section>
+      <h2><span class="num">2</span>谁适合用</h2>
+      <div class="section-grid">$audience</div>
+    </section>
+
+    <section>
+      <h2><span class="num">3</span>它怎么帮你做</h2>
+      <div class="flow">$workflow</div>
+    </section>
+
+    <section>
+      <h2><span class="num">4</span>你要给它什么</h2>
+      <div class="section-grid">$inputs</div>
+    </section>
+
+    <section>
+      <h2><span class="num">5</span>它会给你什么</h2>
+      <div class="section-grid">$outputs</div>
+    </section>
+
+    <section>
+      <h2><span class="num">6</span>什么时候用它</h2>
+      <div class="section-grid">$scenarios</div>
+    </section>
+  </main>
+</body>
+</html>

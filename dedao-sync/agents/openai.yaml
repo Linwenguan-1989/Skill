@@ -1,0 +1,4 @@
+interface:
+  display_name: "Dedao Sync"
+  short_description: "按日期或时间范围同步得到大脑原始文字记录到本地文件夹"
+  default_prompt: "Use $dedao-sync to fetch original 得到大脑 records for a specific day, exact time, or bounded time range to local files."

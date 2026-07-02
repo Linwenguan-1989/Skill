@@ -1,0 +1,4 @@
+interface:
+  display_name: "Meeting Minutes Auto"
+  short_description: "Sync a Get笔记 note, generate minutes, and send to Feishu."
+  default_prompt: "把得到大脑指定笔记生成会议纪要并发到我的飞书"

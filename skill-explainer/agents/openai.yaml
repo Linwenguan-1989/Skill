@@ -1,0 +1,4 @@
+interface:
+  display_name: "Skill Explainer"
+  short_description: "把 Codex Skill 快速解释成网页"
+  default_prompt: "Use $skill-explainer to turn a Skill folder into a concise HTML explanation page."
