@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{MEETING_TITLE}}｜会议纪要</title>
+  <style>
+    :root {
+      --primary: #BC1F1A;
+      --primary-light: #FBEDEC;
+      --text-main: #1F2933;
+      --text-sub: #5B6673;
+      --bg: #F7F8FA;
+      --card: #FFFFFF;
+      --border: #E8EAED;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text-main);
+      line-height: 1.7;
+    }
+    .page { max-width: 980px; margin: 0 auto; padding: 18px 14px 48px; }
+    .hero {
+      background: linear-gradient(135deg, #BC1F1A 0%, #8F1410 100%);
+      color: #fff;
+      border-radius: 22px;
+      padding: 28px 22px;
+      box-shadow: 0 12px 30px rgba(188, 31, 26, 0.22);
+    }
+    .tag {
+      display: inline-block;
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.18);
+      font-size: 13px;
+      margin-bottom: 12px;
+    }
+    h1 { margin: 0; font-size: 26px; line-height: 1.3; }
+    .meta {
+      margin-top: 14px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      font-size: 14px;
+      color: rgba(255,255,255,0.88);
+    }
+    .meta div { background: rgba(255,255,255,0.12); padding: 10px 12px; border-radius: 12px; }
+    section { margin-top: 22px; }
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+    .section-title::before {
+      content: "";
+      width: 5px;
+      height: 22px;
+      border-radius: 4px;
+      background: var(--primary);
+    }
+    .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: 0 8px 22px rgba(31, 41, 51, 0.04);
+    }
+    .core-card { border-top: 4px solid var(--primary); }
+    .core-card h3, .topic-card h3 { margin: 0 0 8px; font-size: 17px; color: var(--text-main); }
+    .core-card p, .topic-card p { margin: 0; color: var(--text-sub); font-size: 15px; }
+    .highlight { color: var(--primary); font-weight: 700; }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 9px;
+      border-radius: 999px;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .topic-card { margin-bottom: 12px; }
+    .topic-card ul { margin: 8px 0 0; padding-left: 18px; color: var(--text-sub); }
+    .topic-card li { margin: 6px 0; }
+    .data-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .metric {
+      background: #fff;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      padding: 16px 12px;
+      text-align: center;
+    }
+    .metric .num { font-size: 22px; font-weight: 800; color: var(--primary); line-height: 1.2; }
+    .metric .label { margin-top: 6px; font-size: 13px; color: var(--text-sub); }
+    .action-list { display: grid; gap: 10px; }
+    .action {
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: 12px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-left: 5px solid var(--primary);
+      border-radius: 16px;
+      padding: 14px;
+    }
+    .owner { font-weight: 700; color: var(--primary); font-size: 14px; }
+    .action strong { color: var(--text-main); }
+    .action p { margin: 4px 0 0; color: var(--text-sub); font-size: 14px; }
+    .quote {
+      background: var(--primary-light);
+      border-left: 5px solid var(--primary);
+      color: #5A1512;
+      border-radius: 14px;
+      padding: 16px;
+      font-weight: 600;
+    }
+    .table-wrap {
+      overflow-x: auto;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: #fff;
+    }
+    table { width: 100%; border-collapse: collapse; min-width: 680px; }
+    th, td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+      vertical-align: top;
+      font-size: 14px;
+    }
+    th { background: var(--primary-light); color: var(--primary); font-weight: 700; }
+    tr:last-child td { border-bottom: none; }
+    .footer { margin-top: 28px; color: var(--text-sub); font-size: 13px; text-align: center; }
+    @media (max-width: 720px) {
+      .page { padding: 12px 10px 36px; }
+      .hero { border-radius: 18px; padding: 22px 18px; }
+      h1 { font-size: 22px; }
+      .meta, .grid, .data-grid { grid-template-columns: 1fr; }
+      .section-title { font-size: 18px; }
+      .card { padding: 16px; }
+      .action { grid-template-columns: 1fr; }
+      .metric { text-align: left; }
+      .metric .num { font-size: 21px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <div class="tag">{{MEETING_TAG}}</div>
+      <h1>{{MEETING_TITLE}}</h1>
+      <div class="meta">
+        <div><strong>会议时间：</strong>{{MEETING_TIME}}</div>
+        <div><strong>主讲/参会：</strong>{{PARTICIPANTS}}</div>
+        <div><strong>会议类型：</strong>{{MEETING_TYPE}}</div>
+        <div><strong>记录来源：</strong>{{SOURCE}}</div>
+      </div>
+    </header>
+
+    <section>
+      <h2 class="section-title">一、核心观点</h2>
+      <div class="grid">
+        <div class="card core-card"><h3>01｜{{INSIGHT_TITLE_1}}</h3><p>{{INSIGHT_BODY_1}}</p></div>
+        <div class="card core-card"><h3>02｜{{INSIGHT_TITLE_2}}</h3><p>{{INSIGHT_BODY_2}}</p></div>
+        <div class="card core-card"><h3>03｜{{INSIGHT_TITLE_3}}</h3><p>{{INSIGHT_BODY_3}}</p></div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">二、详细内容</h2>
+      <div class="card topic-card">
+        <span class="badge">{{TOPIC_BADGE}}</span>
+        <h3>{{TOPIC_TITLE}}</h3>
+        <ul>
+          <li>{{TOPIC_POINT_1}}</li>
+          <li>{{TOPIC_POINT_2}}</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">三、关键数据汇总</h2>
+      <div class="data-grid">
+        <div class="metric"><div class="num">{{METRIC_1}}</div><div class="label">{{METRIC_LABEL_1}}</div></div>
+        <div class="metric"><div class="num">{{METRIC_2}}</div><div class="label">{{METRIC_LABEL_2}}</div></div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">四、行动清单</h2>
+      <div class="action-list">
+        <div class="action"><div class="owner">{{OWNER}}</div><div><strong>{{ACTION_TITLE}}</strong><p>{{ACTION_DETAIL}}</p></div></div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">五、会议结论</h2>
+      <div class="card topic-card"><p>{{FINAL_CONCLUSION}}</p></div>
+    </section>
+
+    <div class="footer">会议纪要由原始材料结构化整理生成｜主题色：#BC1F1A｜适配移动端阅读</div>
+  </main>
+</body>
+</html>

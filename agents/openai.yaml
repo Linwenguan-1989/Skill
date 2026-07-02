@@ -1,0 +1,5 @@
+interface:
+  display_name: "Meeting Minutes"
+  short_description: "Responsive HTML meeting minutes"
+  default_prompt: "Use $meeting-minutes to generate a complete responsive HTML meeting-minutes document from this text or attachment."
+  brand_color: "#BC1F1A"
